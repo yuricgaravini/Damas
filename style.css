@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-image:url(Image/bg.png);
+}
+
+h3{
+ color: #455A64;
+ font-family: Helvetica;
+ font-size: 24px;
+ font-style: normal;
+}
+
+ul{
+  color: #455A64;
+  font-family: Helvetica;
+  font-size: 16px;
+  font-style: normal;
+  padding-left: 16px;
+}
+
+li{
+  padding: 16px;
+}
+
+h1{
+font-family: Playfair Display;
+font-size: 48px;
+font-style: normal;
+text-align: center;
+margin: -20px;
+}
+
+.content{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.combo{
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-around;
+}
+
+.tabuleiro{
+  padding: 16px;
+  background-image:url(Image/bg.png);
+  box-shadow: 143px 143px 80px rgba(57, 12, 12, 0.16), 31px 31.9409px 17.869px rgba(57, 12, 12, 0.1115), 9px 9.50965px 5.32008px rgba(57, 12, 12, 0.08), inset 2px 2px 2px rgba(255, 255, 255, 0.25);
+}
+
+.tabuleiro_interno{
+  border: #263238 solid;
+}
+
+.linha{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.quadrado{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.casapreta{
+  background-image:url(Image/casa_preta.png);
+  width:40px;
+  height:40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.casabranca{
+    width:40px;
+    height:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.peca_marrom{
+  background-image:url(Image/peca_marrom.png);  
+  background-size: 38px;
+  width: 38px;
+  height: 38px; 
+
+}
+
+.peca_branca{
+  background-image:url(Image/peca_branca.png);
+  background-size: 38px;
+  width: 38px;
+  height: 38px; 
+}
+
+.logo{
+  margin-top: 48px;
+  background-image: url(Image/logo.png);
+  background-size: 200px;
+  width: 200px;
+  height: 37.21px;
+}
+
+.modal-container{
+  background-color: rgba(40, 40, 40, 0.6);
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container.mostrar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content{
+  margin: 0;
+  margin-top: 0;
+  max-width: 560px;
+  max-height: 480px;
+  background-color: #F8F9FA;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 300px;
+  padding: 40px;
+  position: relative;
+}
+
+.icon-help{
+  background-image: url(Image/help.png);
+  background-size: 48px;
+  width: 48px;
+  height: 48px; 
+  cursor: pointer;
+}
+
+.icon-reload{
+  background-image: url(Image/reload.png);
+  background-size: 48px;
+  width: 48px;
+  height: 48px; 
+  cursor: pointer;
+}
+
+.fechar{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 24px;
+  background-image: url(Image/Close.svg);
+  background-size: 24px;
+  width: 24px;
+  height: 24px; 
+  cursor: pointer;
+}
