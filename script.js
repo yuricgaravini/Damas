@@ -34,12 +34,41 @@ function renderizaTabuleiroDom() {
       } else {
         casa.classList.add(casacontraria);
       }
+      casa.setAttribute("data-linha", countLinhas + 1);
+      casa.setAttribute("data-coluna", countColunas + 1);
       linha.appendChild(casa);
     }
     tabuleiro_interno.appendChild(linha);
   }
   tabuleiro.appendChild(tabuleiro_interno);
   renderizaPecasTabuleiro();
+}
+
+function display(event) {
+  const coluna = event.target.parentElement.getAttribute("data-coluna");
+  const linha = event.target.parentElement.getAttribute("data-linha");
+  if (event.target.classList.contains("peca_branca")) {
+    alert(
+      "Eu sou uma peça branca. " +
+        "\n" +
+        "Coluna: " +
+        coluna +
+        "\n" +
+        "Linha: " +
+        linha
+    );
+  }
+  if (event.target.classList.contains("peca_marrom")) {
+    alert(
+      "Eu sou uma peça marrom. " +
+        "\n" +
+        "Coluna: " +
+        coluna +
+        "\n" +
+        "Linha: " +
+        linha
+    );
+  }
 }
 
 function renderizaPecasTabuleiro() {
@@ -49,6 +78,7 @@ function renderizaPecasTabuleiro() {
     for (let countCasas = 0; countCasas < casaspretas.length; countCasas++) {
       const peca = document.createElement("div");
       peca.classList.add("peca_branca");
+      peca.onclick = (e) => display(e);
       casaspretas[countCasas].appendChild(peca);
     }
   }
@@ -57,68 +87,36 @@ function renderizaPecasTabuleiro() {
     for (let countCasas = 0; countCasas < casaspretas.length; countCasas++) {
       const peca = document.createElement("div");
       peca.classList.add("peca_marrom");
+      peca.onclick = (e) => display(e);
       casaspretas[countCasas].appendChild(peca);
     }
   }
 }
 
-let peca_branca = document.querySelector(".tabuleiro_interno");
-function display(event) {
-  if (event.target.classList.contains("peca_branca")) {
-    alert("Eu sou uma peça branca");
-  }
-  if (event.target.classList.contains("peca_marrom")) {
-    alert("Eu sou uma peça marrom");
-  }
-  console.log(event.target.classList);
-}
-
-function alertaPecaBranca() {
-  const pecaBranca = document.querySelectorAll(".peca_branca");
-  for (let i = 0; i < pecaBranca.length; i++) {
-    pecaBranca[i].addEventListener("click", () =>
-      alert("Eu sou uma peça branca")
-    );
-  }
-}
-
-function alertaPecaMarrom() {
-  const pecaMarrom = document.querySelectorAll(".peca_marrom");
-  for (let i = 0; i < pecaMarrom.length; i++) {
-    pecaMarrom[i].addEventListener("click", () =>
-      alert("Eu sou uma peça marrom")
-    );
-  }
-}
-
 function documentoCarregado() {
-  const tabuleiro = document.querySelector(".tabuleiro_interno");
   const iconHelp = document.querySelector(".icon-help");
   iconHelp.addEventListener("click", modalOnclick);
   iconHelp.addEventListener("keydown", modalOnclick);
   renderizaTabuleiroDom();
-  alertaPecaBranca();
-  alertaPecaMarrom();
 }
 
 function modalOnclick() {
   iniciarModal("modal-duvidas");
 }
-
 documentoCarregado();
 
 /*
+
+FEITO - Armazenar estado de posicionamento na peça através de atributos HTML: data-linha="1", data-coluna="A".
+FEITO - No javascript existe uma api para criar atributos em elementos HTML, vc irá utiliza-lo para adicionar o valor do posicionamento ao renderizar o tabuleiro no DOM.
+FEITO - Ao clicar na peça, vc vai recuperar as informações do atribudo de data-linha e data-coluna e imprimi-los.
 FEITO - Delegação de eventos, event bubbling (no DOM, refatora alerta peca branca).
 FEITO - Fazer o ESC para fechar o modal (keyup, keydown).  
 FEITO - Montar o tabuleiro. (apis p/ interagir com dom (appendChilld, innerHTML, createElement, createFragment... e estrutura de laços, colocar uma identificação na peça).
 FEITO - Estudar JS Callback (ex de como usar/aplicar)
 FEITO - Para aprofundar javascript callback.
-BACKLOG - Criar um repositorio para seu código, subir seu código.
-BACKLOG - Procurar documentação amigável começando com git.
-BACKLOG - Armazenar estado de posicionamento na peça através de atributos HTML: data-linha="1", data-coluna="A".
-BACKLOG - Ao clicar na peça, vc vai recuperar as informações do atribudo de data-linha e data-coluna e imprimi-los.
-BACKLOG - No javascript existe uma api para criar atributos em elementos HTML, vc irá utiliza-lo para adicionar o valor do posicionamento ao renderizar o tabuleiro no DOM.
-
+FEITO - Criar um repositorio para seu código, subir seu código.
+FEITO - Procurar documentação amigável começando com git.
 
 
 BACKLOG - Fontes de estudos: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
@@ -142,5 +140,4 @@ const animal = {
 }
 
 console.log(animal.pais.mae.idade)
-
 */
