@@ -48,26 +48,10 @@ function display(event) {
   const coluna = event.target.parentElement.getAttribute("data-coluna");
   const linha = event.target.parentElement.getAttribute("data-linha");
   if (event.target.classList.contains("peca_branca")) {
-    alert(
-      "Eu sou uma peça branca. " +
-        "\n" +
-        "Coluna: " +
-        coluna +
-        "\n" +
-        "Linha: " +
-        linha
-    );
+    alert(`Eu sou uma peça branca. \nColuna: ${coluna} \nLinha: ${linha}`);
   }
   if (event.target.classList.contains("peca_marrom")) {
-    alert(
-      "Eu sou uma peça marrom. " +
-        "\n" +
-        "Coluna: " +
-        coluna +
-        "\n" +
-        "Linha: " +
-        linha
-    );
+    alert(`Eu sou uma peça marrom. \nColuna: ${coluna} \nLinha: ${linha}`);
   }
 }
 
