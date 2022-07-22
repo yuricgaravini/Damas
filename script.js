@@ -1,3 +1,7 @@
+let colunaSelecionada = 0;
+let linhaSelecionada = 0;
+let casaSelecionada = "";
+
 function iniciarModal(modalid) {
   const modal = document.getElementById(modalid);
   modal.classList.add("mostrar");
@@ -36,6 +40,7 @@ function renderizaTabuleiroDom() {
       }
       casa.setAttribute("data-linha", countLinhas + 1);
       casa.setAttribute("data-coluna", countColunas + 1);
+      casa.onclick = (event) => mover(event);
       linha.appendChild(casa);
     }
     tabuleiro_interno.appendChild(linha);
@@ -47,11 +52,27 @@ function renderizaTabuleiroDom() {
 function display(event) {
   const coluna = event.target.parentElement.getAttribute("data-coluna");
   const linha = event.target.parentElement.getAttribute("data-linha");
-  if (event.target.classList.contains("peca_branca")) {
-    alert(`Eu sou uma peça branca. \nColuna: ${coluna} \nLinha: ${linha}`);
-  }
-  if (event.target.classList.contains("peca_marrom")) {
-    alert(`Eu sou uma peça marrom. \nColuna: ${coluna} \nLinha: ${linha}`);
+  linhaSelecionada = linha;
+  colunaSelecionada = coluna;
+  casaSelecionada = event.target.classList.value.trim();
+}
+
+function mover(event) {
+  const casaVazia = !event.currentTarget.firstChild;
+  console.log(linhaSelecionada, colunaSelecionada);
+  if (casaVazia && linhaSelecionada > 0 && colunaSelecionada > 0) {
+    const peca = document.createElement("div");
+    peca.classList.add(casaSelecionada);
+    peca.onclick = (e) => display(e);
+    event.target.appendChild(peca);
+    var posicaoAntiga = document.querySelector(
+      `[data-coluna="${colunaSelecionada}"][data-linha="${linhaSelecionada}"]`
+    );
+    console.log(posicaoAntiga);
+    posicaoAntiga.removeChild(posicaoAntiga.firstElementChild);
+    colunaSelecionada = 0;
+    linhaSelecionada = 0;
+    casaSelecionada = "";
   }
 }
 
