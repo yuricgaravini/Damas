@@ -296,11 +296,11 @@ function mover(event) {
 }
 
 function renderizaPecasTabuleiro() {
-  pecas.forEach((pecas) => {
+  pecas.forEach((peca) => {
     const casa = document.querySelector(
-      `[data-linha="${pecas.posicao.x}"][data-coluna="${pecas.posicao.y}"]`
+      `[data-linha="${peca.posicao.x}"][data-coluna="${peca.posicao.y}"]`
     );
-    const pecaClasse = pecas.cor === "branca" ? "peca_branca" : "peca_marrom";
+    const pecaClasse = peca.cor === "branca" ? "peca_branca" : "peca_marrom";
     const pecaContainer = document.createElement("div");
     pecaContainer.classList.add(pecaClasse);
     pecaContainer.onclick = (e) => display(e);
