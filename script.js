@@ -1,3 +1,222 @@
+const pecas = [
+  {
+    id: 1,
+    cor: "branca",
+    posicao: {
+      x: 1,
+      y: 2,
+    },
+    isDama: false,
+  },
+  {
+    id: 2,
+    cor: "branca",
+    posicao: {
+      x: 1,
+      y: 4,
+    },
+    isDama: false,
+  },
+  {
+    id: 3,
+    cor: "branca",
+    posicao: {
+      x: 1,
+      y: 6,
+    },
+    isDama: false,
+  },
+  {
+    id: 4,
+    cor: "branca",
+    posicao: {
+      x: 1,
+      y: 8,
+    },
+    isDama: false,
+  },
+  {
+    id: 5,
+    cor: "branca",
+    posicao: {
+      x: 2,
+      y: 1,
+    },
+    isDama: false,
+  },
+  {
+    id: 6,
+    cor: "branca",
+    posicao: {
+      x: 2,
+      y: 3,
+    },
+    isDama: false,
+  },
+  {
+    id: 7,
+    cor: "branca",
+    posicao: {
+      x: 2,
+      y: 5,
+    },
+    isDama: false,
+  },
+  {
+    id: 8,
+    cor: "branca",
+    posicao: {
+      x: 2,
+      y: 7,
+    },
+    isDama: false,
+  },
+  {
+    id: 9,
+    cor: "branca",
+    posicao: {
+      x: 3,
+      y: 2,
+    },
+    isDama: false,
+  },
+  {
+    id: 10,
+    cor: "branca",
+    posicao: {
+      x: 3,
+      y: 4,
+    },
+    isDama: false,
+  },
+  {
+    id: 11,
+    cor: "branca",
+    posicao: {
+      x: 3,
+      y: 6,
+    },
+    isDama: false,
+  },
+  {
+    id: 12,
+    cor: "branca",
+    posicao: {
+      x: 3,
+      y: 8,
+    },
+    isDama: false,
+  },
+  {
+    id: 13,
+    cor: "marrom",
+    posicao: {
+      x: 6,
+      y: 1,
+    },
+    isDama: false,
+  },
+  {
+    id: 14,
+    cor: "marrom",
+    posicao: {
+      x: 6,
+      y: 3,
+    },
+    isDama: false,
+  },
+  {
+    id: 15,
+    cor: "marrom",
+    posicao: {
+      x: 6,
+      y: 5,
+    },
+    isDama: false,
+  },
+  {
+    id: 16,
+    cor: "marrom",
+    posicao: {
+      x: 6,
+      y: 7,
+    },
+    isDama: false,
+  },
+  {
+    id: 17,
+    cor: "marrom",
+    posicao: {
+      x: 7,
+      y: 2,
+    },
+    isDama: false,
+  },
+  {
+    id: 18,
+    cor: "marrom",
+    posicao: {
+      x: 7,
+      y: 4,
+    },
+    isDama: false,
+  },
+  {
+    id: 19,
+    cor: "marrom",
+    posicao: {
+      x: 7,
+      y: 6,
+    },
+    isDama: false,
+  },
+  {
+    id: 20,
+    cor: "marrom",
+    posicao: {
+      x: 7,
+      y: 8,
+    },
+    isDama: false,
+  },
+  {
+    id: 21,
+    cor: "marrom",
+    posicao: {
+      x: 8,
+      y: 1,
+    },
+    isDama: false,
+  },
+  {
+    id: 22,
+    cor: "marrom",
+    posicao: {
+      x: 8,
+      y: 3,
+    },
+    isDama: false,
+  },
+  {
+    id: 23,
+    cor: "marrom",
+    posicao: {
+      x: 8,
+      y: 5,
+    },
+    isDama: false,
+  },
+  {
+    id: 24,
+    cor: "marrom",
+    posicao: {
+      x: 8,
+      y: 7,
+    },
+    isDama: false,
+  },
+];
+
 let colunaSelecionada = 0;
 let linhaSelecionada = 0;
 let casaSelecionada = "";
@@ -77,25 +296,16 @@ function mover(event) {
 }
 
 function renderizaPecasTabuleiro() {
-  const linhas = document.querySelectorAll(".linha");
-  for (let countLinhas = 0; countLinhas < 3; countLinhas++) {
-    const casaspretas = linhas[countLinhas].querySelectorAll(".casapreta");
-    for (let countCasas = 0; countCasas < casaspretas.length; countCasas++) {
-      const peca = document.createElement("div");
-      peca.classList.add("peca_branca");
-      peca.onclick = (e) => display(e);
-      casaspretas[countCasas].appendChild(peca);
-    }
-  }
-  for (let countLinhas = 5; countLinhas < 8; countLinhas++) {
-    const casaspretas = linhas[countLinhas].querySelectorAll(".casapreta");
-    for (let countCasas = 0; countCasas < casaspretas.length; countCasas++) {
-      const peca = document.createElement("div");
-      peca.classList.add("peca_marrom");
-      peca.onclick = (e) => display(e);
-      casaspretas[countCasas].appendChild(peca);
-    }
-  }
+  pecas.forEach((pecas) => {
+    const casa = document.querySelector(
+      `[data-linha="${pecas.posicao.x}"][data-coluna="${pecas.posicao.y}"]`
+    );
+    const pecaClasse = pecas.cor === "branca" ? "peca_branca" : "peca_marrom";
+    const pecaContainer = document.createElement("div");
+    pecaContainer.classList.add(pecaClasse);
+    pecaContainer.onclick = (e) => display(e);
+    casa.appendChild(pecaContainer);
+  });
 }
 
 function documentoCarregado() {
