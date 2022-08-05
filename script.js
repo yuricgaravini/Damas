@@ -1,225 +1,8 @@
-const pecas = [
-  {
-    id: 1,
-    cor: "branca",
-    posicao: {
-      x: 1,
-      y: 2,
-    },
-    isDama: false,
-  },
-  {
-    id: 2,
-    cor: "branca",
-    posicao: {
-      x: 1,
-      y: 4,
-    },
-    isDama: false,
-  },
-  {
-    id: 3,
-    cor: "branca",
-    posicao: {
-      x: 1,
-      y: 6,
-    },
-    isDama: false,
-  },
-  {
-    id: 4,
-    cor: "branca",
-    posicao: {
-      x: 1,
-      y: 8,
-    },
-    isDama: false,
-  },
-  {
-    id: 5,
-    cor: "branca",
-    posicao: {
-      x: 2,
-      y: 1,
-    },
-    isDama: false,
-  },
-  {
-    id: 6,
-    cor: "branca",
-    posicao: {
-      x: 2,
-      y: 3,
-    },
-    isDama: false,
-  },
-  {
-    id: 7,
-    cor: "branca",
-    posicao: {
-      x: 2,
-      y: 5,
-    },
-    isDama: false,
-  },
-  {
-    id: 8,
-    cor: "branca",
-    posicao: {
-      x: 2,
-      y: 7,
-    },
-    isDama: false,
-  },
-  {
-    id: 9,
-    cor: "branca",
-    posicao: {
-      x: 3,
-      y: 2,
-    },
-    isDama: false,
-  },
-  {
-    id: 10,
-    cor: "branca",
-    posicao: {
-      x: 3,
-      y: 4,
-    },
-    isDama: false,
-  },
-  {
-    id: 11,
-    cor: "branca",
-    posicao: {
-      x: 3,
-      y: 6,
-    },
-    isDama: false,
-  },
-  {
-    id: 12,
-    cor: "branca",
-    posicao: {
-      x: 3,
-      y: 8,
-    },
-    isDama: false,
-  },
-  {
-    id: 13,
-    cor: "marrom",
-    posicao: {
-      x: 6,
-      y: 1,
-    },
-    isDama: false,
-  },
-  {
-    id: 14,
-    cor: "marrom",
-    posicao: {
-      x: 6,
-      y: 3,
-    },
-    isDama: false,
-  },
-  {
-    id: 15,
-    cor: "marrom",
-    posicao: {
-      x: 6,
-      y: 5,
-    },
-    isDama: false,
-  },
-  {
-    id: 16,
-    cor: "marrom",
-    posicao: {
-      x: 6,
-      y: 7,
-    },
-    isDama: false,
-  },
-  {
-    id: 17,
-    cor: "marrom",
-    posicao: {
-      x: 7,
-      y: 2,
-    },
-    isDama: false,
-  },
-  {
-    id: 18,
-    cor: "marrom",
-    posicao: {
-      x: 7,
-      y: 4,
-    },
-    isDama: false,
-  },
-  {
-    id: 19,
-    cor: "marrom",
-    posicao: {
-      x: 7,
-      y: 6,
-    },
-    isDama: false,
-  },
-  {
-    id: 20,
-    cor: "marrom",
-    posicao: {
-      x: 7,
-      y: 8,
-    },
-    isDama: false,
-  },
-  {
-    id: 21,
-    cor: "marrom",
-    posicao: {
-      x: 8,
-      y: 1,
-    },
-    isDama: false,
-  },
-  {
-    id: 22,
-    cor: "marrom",
-    posicao: {
-      x: 8,
-      y: 3,
-    },
-    isDama: false,
-  },
-  {
-    id: 23,
-    cor: "marrom",
-    posicao: {
-      x: 8,
-      y: 5,
-    },
-    isDama: false,
-  },
-  {
-    id: 24,
-    cor: "marrom",
-    posicao: {
-      x: 8,
-      y: 7,
-    },
-    isDama: false,
-  },
-];
-
-let colunaSelecionada = 0;
-let linhaSelecionada = 0;
-let casaSelecionada = "";
+//Criar estrutura de lista com base no loop (criar de forma automatica) POHAAAAA!!!! - Feito
+//Movimentação olhando a lista - Feito
+const pecas = [];
+let casaSelecionadaId = null;
+var vezJogador = "branca";
 
 function iniciarModal(modalid) {
   const modal = document.getElementById(modalid);
@@ -232,6 +15,49 @@ function iniciarModal(modalid) {
     if (e.key == "Escape" || e.target.className == "fechar")
       modal.classList.remove("mostrar");
   });
+}
+
+function criarPecasTabuleiro() {
+  let pecaId = 1;
+  const linhas = document.querySelectorAll(".linha");
+  for (let countLinhas = 0; countLinhas < 3; countLinhas++) {
+    const casaspretas = linhas[countLinhas].querySelectorAll(".casapreta");
+    for (let countCasas = 0; countCasas < casaspretas.length; countCasas++) {
+      var coluna = parseInt(
+        casaspretas[countCasas].getAttribute("data-coluna")
+      );
+      const objetoPeca = {
+        id: pecaId,
+        cor: "branca",
+        posicao: {
+          x: countLinhas + 1,
+          y: coluna,
+        },
+        isDama: false,
+      };
+      pecas.push(objetoPeca);
+      pecaId++;
+    }
+  }
+  for (let countLinhas = 5; countLinhas < 8; countLinhas++) {
+    const casaspretas = linhas[countLinhas].querySelectorAll(".casapreta");
+    for (let countCasas = 0; countCasas < casaspretas.length; countCasas++) {
+      var coluna = parseInt(
+        casaspretas[countCasas].getAttribute("data-coluna")
+      );
+      const objetoPeca = {
+        id: pecaId,
+        cor: "marrom",
+        posicao: {
+          x: countLinhas + 1,
+          y: coluna,
+        },
+        isDama: false,
+      };
+      pecas.push(objetoPeca);
+      pecaId++;
+    }
+  }
 }
 
 function renderizaTabuleiroDom() {
@@ -265,36 +91,61 @@ function renderizaTabuleiroDom() {
     tabuleiro_interno.appendChild(linha);
   }
   tabuleiro.appendChild(tabuleiro_interno);
+  criarPecasTabuleiro();
   renderizaPecasTabuleiro();
 }
 
-function display(event) {
-  const coluna = event.target.parentElement.getAttribute("data-coluna");
-  const linha = event.target.parentElement.getAttribute("data-linha");
-  linhaSelecionada = linha;
-  colunaSelecionada = coluna;
-  casaSelecionada = event.target.classList.value.trim();
+function selecionarPeca(event) {
+  const coluna = parseInt(
+    event.target.parentElement.getAttribute("data-coluna")
+  );
+  const linha = parseInt(event.target.parentElement.getAttribute("data-linha"));
+  pecas.forEach((peca) => {
+    if (peca.posicao.x === linha && peca.posicao.y === coluna) {
+      if (peca.cor === vezJogador) {
+        casaSelecionadaId = peca.id;
+        return;
+      } else {
+        alert("Aguarde seu adversário fazer a movimentação.");
+        return;
+      }
+    }
+  });
 }
 
+//Determinar de quem é a vez de jogar (alternando entre peca branca/marrom) - Feito
 function mover(event) {
   const casaVazia = !event.currentTarget.firstChild;
-  console.log(linhaSelecionada, colunaSelecionada);
-  if (casaVazia && linhaSelecionada > 0 && colunaSelecionada > 0) {
-    const peca = document.createElement("div");
-    peca.classList.add(casaSelecionada);
-    peca.onclick = (e) => display(e);
-    event.target.appendChild(peca);
-    var posicaoAntiga = document.querySelector(
-      `[data-coluna="${colunaSelecionada}"][data-linha="${linhaSelecionada}"]`
-    );
-    console.log(posicaoAntiga);
-    posicaoAntiga.removeChild(posicaoAntiga.firstElementChild);
-    colunaSelecionada = 0;
-    linhaSelecionada = 0;
-    casaSelecionada = "";
+  if (casaVazia && casaSelecionadaId) {
+    pecas.forEach((peca) => {
+      if (peca.id === casaSelecionadaId) {
+        const linhaSelecionada = event.currentTarget.getAttribute("data-linha");
+        const pecaMover = document.createElement("div");
+        pecaMover.classList.add(
+          peca.cor === "branca" ? "peca_branca" : "peca_marrom"
+        );
+        pecaMover.onclick = (e) => selecionarPeca(e);
+        event.target.appendChild(pecaMover);
+        var posicaoAntiga = document.querySelector(
+          `[data-linha="${peca.posicao.x}"][data-coluna="${peca.posicao.y}"]`
+        );
+        posicaoAntiga.removeChild(posicaoAntiga.firstElementChild);
+        peca.posicao.x = parseInt(event.target.getAttribute("data-linha"));
+        peca.posicao.y = parseInt(event.target.getAttribute("data-coluna"));
+        casaSelecionadaId = null;
+        if (vezJogador === "branca") {
+          vezJogador = "marrom";
+        } else {
+          vezJogador = "branca";
+        }
+        return;
+      }
+    });
   }
 }
-
+//Destacar de qual jogador é a vez(mudança na peça, apoio de texto, etc)
+//Dica para onde ele pode movimentar
+//Fazer movimento correto da pecas
 function renderizaPecasTabuleiro() {
   pecas.forEach((peca) => {
     const casa = document.querySelector(
@@ -303,7 +154,7 @@ function renderizaPecasTabuleiro() {
     const pecaClasse = peca.cor === "branca" ? "peca_branca" : "peca_marrom";
     const pecaContainer = document.createElement("div");
     pecaContainer.classList.add(pecaClasse);
-    pecaContainer.onclick = (e) => display(e);
+    pecaContainer.onclick = (e) => selecionarPeca(e);
     casa.appendChild(pecaContainer);
   });
 }
